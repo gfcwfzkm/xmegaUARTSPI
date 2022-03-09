@@ -24,7 +24,7 @@ typedef struct {
 }USARTSPI_Master_t;
 
 
-void usartSPI_init(USARTSPI_Master_t *uspi_p, USART_t *uartPtr, int8_t _bscaleFactor, uint16_t bselValue, uint8_t useDoubleSpeed);
+void usartSPI_init(USARTSPI_Master_t *uspi_p, USART_t *uartPtr, int8_t _bscaleFactor, uint16_t bselValue);
 
 void usartSPI_port(USARTSPI_Master_t *uspi_p, PORT_t *port, uint8_t cs_pin, uint8_t activeLow);
 
@@ -39,17 +39,17 @@ uint8_t usartSPI_InterfacePrepare(void *intUSPI);
 uint8_t usartSPI_InterfaceSendBytes(void *intUSPI,
 								uint8_t addr,
 								const uint8_t *buf_ptr,
-								uint32_t buf_len);
+								uint16_t buf_len);
 
 uint8_t usartSPI_InterfaceTransceiveBytes(void *intUSPI,
 								uint8_t addr,
 								uint8_t *buf_ptr,
-								uint32_t buf_len);
+								uint16_t buf_len);
 
 uint8_t usartSPI_InterfaceGetBytes(void *intUSPI,
 								uint8_t addr,
 								uint8_t *buf_ptr,
-								uint32_t buf_len);
+								uint16_t buf_len);
 
 uint8_t usartSPI_InterfaceFinish(void *intUSPI);
 

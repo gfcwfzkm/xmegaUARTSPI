@@ -7,13 +7,13 @@
 
 #include "uartSPI.h"
 
-void usartSPI_init(USARTSPI_Master_t *uspi_p, USART_t *uartPtr, int8_t _bscaleFactor, uint16_t bselValue, uint8_t useDoubleSpeed)
+void usartSPI_init(USARTSPI_Master_t *uspi_p, USART_t *uartPtr, int8_t _bscaleFactor, uint16_t bselValue)
 {
 	uspi_p->usart_p = uartPtr;
 	uspi_p->usart_p->CTRLC = USART_CMODE_MSPI_gc;
 	uspi_p->usart_p->CTRLA = 0;
 	uspi_p->usart_p->STATUS = USART_TXCIF_bm;
-	uspi_p->usart_p->CTRLB = USART_RXEN_bm | USART_TXEN_bm | (useDoubleSpeed ? USART_CLK2X_bm : 0);
+	uspi_p->usart_p->CTRLB = USART_RXEN_bm | USART_TXEN_bm | USART_CLK2X_bm;
 	uspi_p->usart_p->BAUDCTRLA = (uint8_t)bselValue;
 	uspi_p->usart_p->BAUDCTRLB = ((_bscaleFactor & 0x0F) << USART_BSCALE_gp)|((bselValue & 0xF00) >> 8);
 }
@@ -74,7 +74,7 @@ uint8_t usartSPI_InterfacePrepare(void *intSPI)
 }
 
 uint8_t usartSPI_InterfaceSendBytes(void *intSPI, uint8_t addr,
-									const uint8_t *buf_ptr, uint32_t buf_len)
+									const uint8_t *buf_ptr, uint16_t buf_len)
 {
 	USARTSPI_Master_t *usartSPI = (USARTSPI_Master_t*)intSPI;
 	uint32_t byteCnt;
@@ -90,7 +90,7 @@ uint8_t usartSPI_InterfaceSendBytes(void *intSPI, uint8_t addr,
 }
 
 uint8_t usartSPI_InterfaceTransceiveBytes(void *intSPI, uint8_t addr,
-									uint8_t *buf_ptr, uint32_t buf_len)
+									uint8_t *buf_ptr, uint16_t buf_len)
 {
 	USARTSPI_Master_t *usartSPI = (USARTSPI_Master_t*)intSPI;
 	uint32_t byteCnt;
@@ -106,7 +106,7 @@ uint8_t usartSPI_InterfaceTransceiveBytes(void *intSPI, uint8_t addr,
 }
 
 uint8_t usartSPI_InterfaceGetBytes(void *intSPI, uint8_t addr,
-									uint8_t *buf_ptr, uint32_t buf_len)
+									uint8_t *buf_ptr, uint16_t buf_len)
 {
 	USARTSPI_Master_t *usartSPI = (USARTSPI_Master_t*)intSPI;
 	uint32_t byteCnt;
