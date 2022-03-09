@@ -38,7 +38,7 @@ uint8_t usartSPI_InterfacePrepare(void *intUSPI);
 
 uint8_t usartSPI_InterfaceSendBytes(void *intUSPI,
 								uint8_t addr,
-								const uint8_t *buf_ptr,
+								uint8_t *buf_ptr,
 								uint16_t buf_len);
 
 uint8_t usartSPI_InterfaceTransceiveBytes(void *intUSPI,

@@ -74,7 +74,7 @@ uint8_t usartSPI_InterfacePrepare(void *intSPI)
 }
 
 uint8_t usartSPI_InterfaceSendBytes(void *intSPI, uint8_t addr,
-									const uint8_t *buf_ptr, uint16_t buf_len)
+									uint8_t *buf_ptr, uint16_t buf_len)
 {
 	USARTSPI_Master_t *usartSPI = (USARTSPI_Master_t*)intSPI;
 	uint32_t byteCnt;
